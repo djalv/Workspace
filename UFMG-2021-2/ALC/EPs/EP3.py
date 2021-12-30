@@ -17,13 +17,16 @@ def EP_answers(A, B):
     ### PARTE 1
 
     ## 1.1
-    ## Insira seu código aqui
+    U, Sigma_vet, Vt = np.linalg.svd(A)
     
     ## 1.2
-    ## Insira seu código aqui
+    Sigma = np.diag(Sigma_vet)
     
     ## 1.3
-    ## Insira seu código aqui
+    def reconstrucao_aproximada(u, sigma, vt, k):
+        return np.matrix(u[:,:k]) * sigma[:k,:k,] * np.matrix(vt[:k,:])
+
+    imgReconst_3 = reconstrucao_aproximada(U, Sigma, Vt, 3)
     
     ## 1.4
     ## Insira seu código aqui
