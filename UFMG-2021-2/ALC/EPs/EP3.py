@@ -27,6 +27,7 @@ def EP_answers(A, B):
         return np.matrix(u[:,:k]) * sigma[:k,:k,] * np.matrix(vt[:k,:])
 
     imgReconst_3 = reconstrucao_aproximada(U, Sigma, Vt, 3)
+    print("teste")
     
     ## 1.4
     ## Insira seu código aqui
