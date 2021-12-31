@@ -1,7 +1,7 @@
 import numpy as np
 
-nome = ""
-matricula = None
+nome = "Alvaro Candido de Oliveira Neto"
+matricula = 2019117198
 
 def EP_answers(A, B):
     import numpy as np
@@ -27,49 +27,74 @@ def EP_answers(A, B):
         return np.matrix(u[:,:k]) * sigma[:k,:k,] * np.matrix(vt[:k,:])
 
     imgReconst_3 = reconstrucao_aproximada(U, Sigma, Vt, 3)
-    print("teste")
     
     ## 1.4
-    ## Insira seu código aqui
+    log_Sigma = np.log(Sigma_vet)
+    cumul_Sigma = np.cumsum(Sigma_vet)
     
     ## 1.5
-    ## Insira seu código aqui
+    def calcula_RMSE(img, imgReconst):
+        return np.linalg.norm(img - imgReconst)
+
+    rmseReconst_3 = calcula_RMSE(A, imgReconst_3)
     
     ## 1.6
-    ## Insira seu código aqui
+    imgReconst_10 = reconstrucao_aproximada(U, Sigma, Vt, 10)
+    imgReconst_100 = reconstrucao_aproximada(U, Sigma, Vt, 100)
+    imgReconst_500 = reconstrucao_aproximada(U, Sigma, Vt, 500)
+
+    rmseReconst_10 = calcula_RMSE(A, imgReconst_10)
+    rmseReconst_100 = calcula_RMSE(A, imgReconst_100)
+    rmseReconst_500 = calcula_RMSE(A, imgReconst_500)
     
     ## 1.7
-    ## Insira seu código aqui
+    def calcula_qtd_elementos(U, Sigma_vet, Vt):
+        return U.size + Sigma_vet.size + Vt.size
+
+    uso_k_10 = calcula_qtd_elementos(U[:,:10], Sigma_vet[:10], Vt[:10,:])
+    uso_k_100 = calcula_qtd_elementos(U[:,:100], Sigma_vet[:100], Vt[:100,:])
+    uso_k_500 = calcula_qtd_elementos(U[:,:500], Sigma_vet[:500], Vt[:500,:])
    
     ## 1.8
-    ## Insira seu código aqui
+    def get_limite(min_nrg, cumul_Sigma, k):
+        for k in range(0, cumul_Sigma.size):
+            if(cumul_Sigma[k]/cumul_Sigma[-1] >= min_nrg):
+                return k
+
+    lim_energ = get_limite(0.8, cumul_Sigma, 10)
     
 
     ### PARTE 2
     ## Insira seu código aqui
 
     ## 2.1
-    ## Insira seu código aqui
+    B_media = np.mean(B, axis=0)
+    Bm = B - B_media
     
 
     ## 2.2
-    ## Insira seu código aqui
-    
+    BmT = np.transpose(Bm)
+    S = np.matrix(BmT) * np.matrix(Bm)
     
     ## 2.3
-    ## Insira seu código aqui
-    
+    w2, V2 = np.linalg.eig(S)
+    ind = np.argsort(-1*w2, axis=0)
+
+    w2 = w2[ind]
+    V2 = V2[:, ind]
 
     ## 2.4
-    ## Insira seu código aqui
+    valores_sing = np.sqrt(w2)
     
 
     ## 2.5
-    ## Insira seu código aqui
+    Sigma_vals_sing = np.diag(valores_sing)
+    Sigma_inv = np.linalg.inv(Sigma_vals_sing)
     
 
     ## 2.6
-    ## Insira seu código aqui
+    U2_10 = Bm * V2 * Sigma_inv
+    imgs2_10  = reconstrucao_aproximada(U2_10, Sigma_vals_sing, V2, 200)
     
 
     ################### NÃO ALTERE DENTRO DA SEÇÃO ABAIXO ###################
