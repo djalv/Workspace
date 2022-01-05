@@ -1,5 +1,5 @@
-CXX       := g++
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb -g -O3
+CXX       := gcc
+CXX_FLAGS := -ggdb -g -O3 -lgmp
 
 BIN     := bin
 SRC     := src
@@ -16,7 +16,7 @@ run: clean all
 	@echo "🚀 Executing..."
 	./$(BIN)/$(EXECUTABLE)
 
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
+$(BIN)/$(EXECUTABLE): $(SRC)/*.c
 	@echo "🚧 Building..."
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
 
