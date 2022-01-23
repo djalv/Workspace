@@ -17,3 +17,16 @@ Ambiente de Programação Virtual (VPL)
 6 - Corrija os erros em seu script, e repita a partir do passo 1 caso queria reenviar sua solução.
 
 '''
+import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.array([[7, 12, 8]])
+Y = np.array([[5, 10, 15]])
+
+plt.plot(X, Y)
+
+mu_x = np.mean(X)
+mu_y = np.mean(Y)
+
+print(X-mu)
+
