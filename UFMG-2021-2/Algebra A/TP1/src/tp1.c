@@ -50,9 +50,20 @@ int inverso_modular(mpz_t r, const mpz_t a, const mpz_t n) {
 }
 
 void exp_binaria(mpz_t r, const mpz_t b, const mpz_t e, const mpz_t n) {
-    
-}
+    mpz_t pot_atual, exp_atual, paridade, prod;
+    mpz_inits(paridade, prod, NULL);
+    mpz_init_set(pot_atual, b);
+    mpz_init_set(exp_atual, e);
+    mpz_set_ui(r, 1);
 
-int main() {
-
+    while(mpz_cmp_ui(exp_atual, 0) > 0) {
+        mpz_mod_ui(paridade, exp_atual, 2);
+        if(mpz_cmp_ui(paridade, 1) == 0) {
+            mpz_mul(prod, r, pot_atual);
+            mpz_mod(r, prod, n);
+        }
+        mpz_mul(prod, pot_atual, pot_atual);
+        mpz_mod(pot_atual, prod, n);
+        mpz_fdiv_q_ui(exp_atual, exp_atual, 2);
+    }
 }

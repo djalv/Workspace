@@ -19,5 +19,3 @@ for l in crivo(109):
     if l:
         primos.append(k)
     k = k + 1
-
-print(primos)

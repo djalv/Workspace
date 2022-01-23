@@ -8,4 +8,4 @@ def euclides(a,b):
 
     return (g,y,x-q*y)
 
-print(euclides(42,27))
+print(euclides(34,98))
