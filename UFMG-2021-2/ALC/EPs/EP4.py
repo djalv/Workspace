@@ -18,15 +18,20 @@ Ambiente de Programação Virtual (VPL)
 
 '''
 import numpy as np
-import matplotlib.pyplot as plt
 
-X = np.array([[7, 12, 8]])
-Y = np.array([[5, 10, 15]])
+X = np.array([[3, 12, 9]])
+Y = np.array([[5, 20, 15]])
 
-plt.plot(X, Y)
 
 mu_x = np.mean(X)
 mu_y = np.mean(Y)
 
-print(X-mu)
+x_c = X-mu_x
+y_c = Y-mu_y
+
+aux = x_c * y_c
+
+print(aux)
+
+
 
