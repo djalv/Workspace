@@ -23,10 +23,8 @@ import matplotlib.pyplot as plt
 X = np.array([[7, 12, 8]])
 Y = np.array([[5, 10, 15]])
 
-plt.plot(X, Y)
+plt.plot(X, Y, )
 
 mu_x = np.mean(X)
 mu_y = np.mean(Y)
-
-print(X-mu)
 
