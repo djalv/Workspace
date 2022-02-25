@@ -1,7 +1,16 @@
+from cmath import sqrt
 import numpy as np
-from numpy import linalg as LA
 
-w,v = LA.eig(np.diag((1,2,3)))
-d = w*v
-j = np.diag((1,2,3))
-print(j)
+father = np.array([-0.5, 0.87])
+mother = np.array([-1, 0])
+g = np.array([-0.71, 0.71])
+
+
+u = (mother + father)/2
+
+ub = np.inner(u, g) * g
+y = u - ub
+
+z = sqrt(1 - ((np.linalg.norm(y))**2))
+Va = y - z*g
+print(z*g)

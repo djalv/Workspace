@@ -15,7 +15,8 @@ def crivo(M):
 
 primos = []
 k = 0
-for l in crivo(109):
+for l in crivo(211):
     if l:
         primos.append(k)
     k = k + 1
+print(primos)

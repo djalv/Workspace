@@ -4,7 +4,25 @@ def euclides(a,b):
     r = a % b
     return euclides(b,r)
 
-x = int(input("x = "))
-y = int(input("y = "))
+def exteuclides(a,b):
+    if b == 0:
+        return (a,1,0)
+    else:
+        r = a % b
+        q = (a - r)/b
+        (g,x,y) = exteuclides(b,r)
 
-print(euclides(x,y))
+    return (g,y,x-q*y)
+
+
+#x = int(input("x = "))
+#y = int(input("y = "))
+
+
+primos = []
+for i in range(0, 12):
+    m = euclides(i, 12)
+    if(m == 1):
+        print(i)
+
+print(euclides(0, 12))

@@ -22,10 +22,15 @@ import numpy as np
 X = np.array([[3, 12, 9]])
 Y = np.array([[5, 20, 15]])
 
+<<<<<<< HEAD
+=======
+plt.plot(X, Y, )
+>>>>>>> d34637f37685e42bed9ef1fdd9d2a3074131ead1
 
 mu_x = np.mean(X)
 mu_y = np.mean(Y)
 
+<<<<<<< HEAD
 x_c = X-mu_x
 y_c = Y-mu_y
 
@@ -35,3 +40,5 @@ print(aux)
 
 
 
+=======
+>>>>>>> d34637f37685e42bed9ef1fdd9d2a3074131ead1
