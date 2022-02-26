@@ -1,5 +1,5 @@
 CXX       := gcc
-CXX_FLAGS := -ggdb -g -O3 -lgmp
+CXX_FLAGS := -ggdb -g -O3 -lgmp -lm
 
 BIN     := bin
 SRC     := src
