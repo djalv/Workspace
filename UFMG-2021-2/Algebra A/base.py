@@ -7,4 +7,4 @@ def digitos(n, B):
         n = q
     return d
 
-print(digitos(2018,2))
+print(digitos(7760993,256))
