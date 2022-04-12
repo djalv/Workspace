@@ -4,7 +4,7 @@ def digitos(a, B):
         r = a % B # a = qB+r com 0 <= r < B
         q = a // B
         d.insert(0, r)
-        A = q
+        a = q
     return d
 
 print(digitos(7760993,256))
