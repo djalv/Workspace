@@ -7,4 +7,5 @@ def digitos(n, B):
         n = q
     return d
 
-print(digitos(7760993,256))
+for i in range(100):
+    print(i, digitos(i,3))
