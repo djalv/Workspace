@@ -1,11 +1,10 @@
-def digitos(n, B):
+def digitos(a, B):
     d = []
-    while n > 0:
-        r = n % B # n = qB+r com 0 <= r < B
-        q = n // B
+    while a > 0:
+        r = a % B # a = qB+r com 0 <= r < B
+        q = a // B
         d.insert(0, r)
-        n = q
+        a = q
     return d
 
-for i in range(100):
-    print(i, digitos(i,3))
+print(digitos(7760993,256))
