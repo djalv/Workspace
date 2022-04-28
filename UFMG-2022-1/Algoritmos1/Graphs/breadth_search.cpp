@@ -6,46 +6,42 @@
 
 using namespace std;
 
-
-
-void bfs(list <int> *adj, list <int> *L, bool *discovered, int s) {
-    int i = 0;
-    list <int> :: iterator u;
+void bfs(list <int> *adj, list <int> &conect, int *levels, bool *discovered, int s, int n) {
     list <int> q;
-
-
-    discovered[s] = true;
-    L[0].push_back(s);
-
-    while(!L[i].empty()) {
-        for(u = L[i].begin(); u != L[i].end(); ++u) {
-            q = adj[(*u)];
-            
-            while(!q.empty()) {
-                int v = q.front();
-                
-                q.pop_front();
-
-                if(discovered[v] == false) {
-                    discovered[v] = true;
-                    L[i+1].push_back(v);
-                }
-            }
-        }
-        i++; 
-    }
-}
-
-int main() {
-    int n = 4;
-    bool discovered[n];
+    list <int> :: iterator u;
 
     for(int i = 0; i < n; i++) {
         discovered[i] = false;
     }
 
-    list <int> adj[n], L[n];
-    list <int> :: iterator j;
+    discovered[s] = true;
+    levels[s] = 0;
+    q.push_back(s);
+
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop_front();
+
+        conect.push_back(v);
+        
+        for(u = adj[v].begin(); u != adj[v].end(); u++) {
+            if(discovered[*u] == false) {
+                discovered[*u] = true;
+                q.push_back(*u);
+                levels[*u] = levels[v] + 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 6;
+    int levels[n];
+    bool discovered[n];
+
+    list <int> adj[n];
+    list <int> comp_conect;
+    list <int> :: iterator it;
 
     adj[0].push_back(1);
     adj[0].push_back(2);
@@ -59,14 +55,18 @@ int main() {
 
     adj[3].push_back(2);
     adj[3].push_back(3);
+    adj[3].push_back(4);
 
-    bfs(adj, L, discovered, 3);
+    adj[4].push_back(3);
+    adj[4].push_back(5);
 
-    for(int i = 0; i < n; i++) {
-        for(j = L[i].begin(); j != L[i].end(); j++) {
-            cout << *j << " ";
-        }
-        cout << endl;
-    }
+    adj[5].push_back(4);
+    
+    bfs(adj, comp_conect, levels, discovered, 2, n);
+    
+    for(it = comp_conect.begin(); it != comp_conect.end(); it++) {
+        cout << *it << " ";
+    }cout << endl;
+    
     return 0;
 }
