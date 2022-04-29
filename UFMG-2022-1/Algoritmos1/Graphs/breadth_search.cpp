@@ -26,7 +26,7 @@ void bfs(list <int> *adj, list <int> &conect, int *levels, bool *discovered, int
         
         for(u = adj[v].begin(); u != adj[v].end(); u++) {
             if(discovered[*u] == false) {
-                discovered[*u] = true;
+                discovered[*u] = true;  
                 q.push_back(*u);
                 levels[*u] = levels[v] + 1;
             }
