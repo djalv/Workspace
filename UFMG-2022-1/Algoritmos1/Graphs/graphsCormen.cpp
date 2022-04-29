@@ -36,6 +36,8 @@ class Graph {
         
         void DFS();
         void DFS_visit(Node u);
+
+        void bipartiteness();
 };
 
 Node::Node(int node) {
@@ -120,6 +122,23 @@ void Graph::DFS_visit(Node u) {
     nodes[u.node].color = "Gray";
 
     for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
+        /*if(nodes[(*v).node].color == "Black") {
+            if(nodes[u.node].iniTime < nodes[(*v).node].iniTime) {
+                cout << "(" << u.node << ", " << (*v).node << ") é uma aresta direta" << endl;
+            }
+            else {
+                cout << "(" << u.node << ", " << (*v).node << ") é uma aresta cruzada" << endl;
+            }
+        }
+        else if(nodes[(*v).node].color == "Gray") {
+            cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de retorno" << endl;
+        }
+        else if(nodes[(*v).node].color == "White") {
+            nodes[(*v).node].parent = u.node;
+            cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de arvore" << endl;
+            DFS_visit(*v);
+        }*/
+
         if(nodes[(*v).node].color == "White") {
             nodes[(*v).node].parent = u.node;
             cout << (*v).node << " ";
@@ -134,17 +153,16 @@ void Graph::DFS_visit(Node u) {
 int main() {
     Node s(0);
     
-    Graph g(6);
-    g.addEdge(0, 1);
-    g.addEdge(0, 3);
-    g.addEdge(1, 4);
-    g.addEdge(2, 4);
-    g.addEdge(2, 5);
-    g.addEdge(3, 1);
-    g.addEdge(4, 3);
-    g.addEdge(5, 5);
+    Graph g(5);
+    g.addEdge(0,1);
+    g.addEdge(0,2);
+    g.addEdge(1,3);
+    g.addEdge(1,4);
+    g.addEdge(2,3);
+    g.addEdge(2,4);
     
-    g.BFS(s);
+    
+    //g.BFS(s);
     g.DFS();
     return 0;
 }
