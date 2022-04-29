@@ -174,6 +174,7 @@ void Graph::topological_sort() {
     }
     cout << endl;
 }
+
 int main() {
     Node s(0);
     
