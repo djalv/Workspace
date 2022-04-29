@@ -24,6 +24,7 @@ class Graph {
     private:
         int n;
         int time;
+        bool isDAG;
 
         vector <Node> nodes;
         vector <list <Node>> adj;
@@ -37,7 +38,7 @@ class Graph {
         void DFS();
         void DFS_visit(Node u);
 
-        void bipartiteness();
+        void topological_sort();
 };
 
 Node::Node(int node) {
@@ -59,6 +60,7 @@ Graph::Graph(int n) {
 
     this-> n = n;
     adj.resize(n);
+    isDAG = true;
 }
 
 void Graph::addEdge(int u, int v) {
@@ -107,10 +109,10 @@ void Graph::DFS() {
     
     for(u = nodes.begin(); u != nodes.end(); u++) {
         if((*u).color == "White") {
-            cout << (*u).node << " ";
+            //cout << (*u).node << " ";
             DFS_visit(*u);
         }
-        cout << endl;
+        //cout << endl;
     }
 }
 
@@ -122,26 +124,22 @@ void Graph::DFS_visit(Node u) {
     nodes[u.node].color = "Gray";
 
     for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
-        /*if(nodes[(*v).node].color == "Black") {
+        if(nodes[(*v).node].color == "Black") {
             if(nodes[u.node].iniTime < nodes[(*v).node].iniTime) {
-                cout << "(" << u.node << ", " << (*v).node << ") é uma aresta direta" << endl;
+                //cout << "(" << u.node << ", " << (*v).node << ") é uma aresta direta" << endl;
             }
             else {
-                cout << "(" << u.node << ", " << (*v).node << ") é uma aresta cruzada" << endl;
+                //cout << "(" << u.node << ", " << (*v).node << ") é uma aresta cruzada" << endl;
             }
         }
         else if(nodes[(*v).node].color == "Gray") {
-            cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de retorno" << endl;
+            //cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de retorno" << endl;
+            isDAG = false;
         }
         else if(nodes[(*v).node].color == "White") {
             nodes[(*v).node].parent = u.node;
-            cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de arvore" << endl;
-            DFS_visit(*v);
-        }*/
-
-        if(nodes[(*v).node].color == "White") {
-            nodes[(*v).node].parent = u.node;
-            cout << (*v).node << " ";
+            //cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de arvore" << endl;
+            //cout << (*v).node << " ";
             DFS_visit(*v);
         }
     }
@@ -150,19 +148,54 @@ void Graph::DFS_visit(Node u) {
     nodes[u.node].finalTime = time;
 }
 
+void Graph::topological_sort() {
+    vector <Node> topOrder;
+    vector <Node> :: iterator it;
+    Node aux(-1);
+    
+    DFS();
+    if(isDAG) {
+        topOrder = nodes;
+        
+        // Implementar um algoritmo de ordenação mais eficiente
+        for(int i = 0; i < n; i++) {
+            for(int j = i+1; j < n; j++) {
+                if(topOrder[j].finalTime > topOrder[i].finalTime) {
+                    aux = topOrder[i];
+                    topOrder[i] = topOrder[j];
+                    topOrder[j] = aux;
+                }
+            }
+        }
+        
+        for(it = topOrder.begin(); it != topOrder.end(); it++) {
+            cout << (*it).node << " ";
+        }
+    }
+    cout << endl;
+}
 int main() {
     Node s(0);
     
-    Graph g(5);
-    g.addEdge(0,1);
-    g.addEdge(0,2);
-    g.addEdge(1,3);
+    Graph g(7);
+    g.addEdge(0,3);
+    g.addEdge(0,4);
+    g.addEdge(0,6);
+    g.addEdge(1,2);
     g.addEdge(1,4);
+    g.addEdge(1,5);
     g.addEdge(2,3);
     g.addEdge(2,4);
+    g.addEdge(3,4);
+    g.addEdge(4,5);
+    g.addEdge(4,6);
+    g.addEdge(5,6);
+
     
     
     //g.BFS(s);
-    g.DFS();
+    //g.DFS();
+
+    g.topological_sort();
     return 0;
 }
