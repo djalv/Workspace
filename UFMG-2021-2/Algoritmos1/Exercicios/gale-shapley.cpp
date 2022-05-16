@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <iterator>
+#include <fstream>
 
 using namespace std;
 
@@ -124,48 +125,29 @@ void gale_shapley(list <int> *hsPreferences, list <int> *stPreferences, int n) {
 }
 
 int main() {
-    int n = 4;
+    int n, in;
+
+    ifstream file("in.txt");
+    file >> n;
+    
     list <int> h[n], s[n];
 
-    h[0].push_back(0);
-    h[0].push_back(3);
-    h[0].push_back(1);
-    h[0].push_back(3);
-
-    h[1].push_back(3);
-    h[1].push_back(2);
-    h[1].push_back(0);
-    h[1].push_back(1);
-
-    h[2].push_back(0);
-    h[2].push_back(2);
-    h[2].push_back(1);
-    h[2].push_back(3);
-
-    h[3].push_back(1);
-    h[3].push_back(3);
-    h[3].push_back(0);
-    h[3].push_back(2);
-
-    s[0].push_back(3);
-    s[0].push_back(0);
-    s[0].push_back(1);
-    s[0].push_back(2);
-
-    s[1].push_back(1);
-    s[1].push_back(2);
-    s[1].push_back(0);
-    s[1].push_back(3);
-
-    s[2].push_back(2);
-    s[2].push_back(1);
-    s[2].push_back(0);
-    s[2].push_back(3);
-
-    s[3].push_back(3);
-    s[3].push_back(0);
-    s[3].push_back(1);
-    s[3].push_back(2);
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            file >> in;
+            h[i].push_back(in);
+        }
+        cout << endl;
+    }
+    
+    file >> n;
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            file >> in;
+            s[i].push_back(in);
+        }
+    }
 
     gale_shapley(h,s,n);
 

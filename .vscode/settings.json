@@ -12,6 +12,7 @@
         "initializer_list": "cpp",
         "iostream": "cpp",
         "*.tcc": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "iosfwd": "cpp"
     }
 }

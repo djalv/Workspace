@@ -143,13 +143,14 @@ void Map::setBikePreferences() {
         }
     }
 
-    for(int i = 0; i < bikePreferences.size(); i++) {
+    /*for(int i = 0; i < bikePreferences.size(); i++) {
         cout << i << "| ";
         for(int j = 0; j < bikePreferences[i].size(); j++) {
+            //char c = bikePreferences[i][j] + 97;
             cout << bikePreferences[i][j] << " ";
         }
         cout << endl;
-    }
+    }*/
 }
 
 void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
@@ -198,13 +199,13 @@ void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
         }
     }
 
-    for(int i = 0; i < visitorPreferences.size(); i++) {
+    /*for(int i = 0; i < visitorPreferences.size(); i++) {
         cout << i << "| ";
         for(int j = 0; j < visitorPreferences[i].size(); j++) {
             cout << visitorPreferences[i][j] << " ";
         }
         cout << endl;
-    }
+    }*/
 }
 
 void range(list <int> &ls, int n) {
@@ -240,7 +241,7 @@ void Map::gale_shapley(){
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            rank[i][bikePreferences[i][j]-1] = j;
+            rank[i][bikePreferences[i][j]] = j+1;
         }
     }
 
@@ -274,10 +275,11 @@ void Map::gale_shapley(){
             if(currentPairRank > visitorRank) {
                 bikePairs[bike] = visitor;
                 visitorPairs[visitor] = bike;
+                visitorPairs[currentPair] = -1;
 
                 nextChoice[visitor] += 1;
                 unpairVisitor.pop_front();
-                unpairVisitor.push_front(currentPairRank);
+                unpairVisitor.push_front(currentPair);
             }
             else {
                 nextChoice[visitor] += 1;

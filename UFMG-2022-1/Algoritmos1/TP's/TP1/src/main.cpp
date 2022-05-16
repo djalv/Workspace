@@ -37,9 +37,7 @@ int main() {
     }
     
     m.setVisitorPreferences(preferences);
-    cout << endl;
     m.setBikePreferences();
-    cout << endl;
     m.gale_shapley();
     file.close();
     return 0;
