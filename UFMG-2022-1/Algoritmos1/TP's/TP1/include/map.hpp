@@ -24,8 +24,8 @@ class Map {
         vector <int> nodeVisitors;
         vector <int> nodeBikes;
 
-        vector <vector <Visitor>> bikePreferences;
-        vector <vector <Bike>> visitorPreferences;
+        vector <vector <int>> bikePreferences;
+        vector <vector <int>> visitorPreferences;
     public:
         Map(int n, int rows, int columns);
         void addItem(char c, int x, int y);

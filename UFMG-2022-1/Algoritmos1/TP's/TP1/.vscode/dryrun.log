@@ -1,0 +1,6 @@
+make all --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1'
+echo "🚧 Building..."
+g++ -Wall -std=c++17 -ggdb -g -O3 -g -Iinclude -Llib src/bike.cpp src/graph.cpp src/main.cpp src/map.cpp src/visitor.cpp -o bin/tp01 
+make: Leaving directory '/home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1'
+ 

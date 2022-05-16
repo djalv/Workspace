@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** Makefile: Is a directory.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-unknown-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** Makefile: Is a directory.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 16 03:03:32 2022
+# Make data base, printed on Mon May 16 02:23:56 2022
 
 # Variables
 
@@ -16,8 +14,8 @@ make: *** Makefile: Is a directory.  Stop.
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
-# environment
-NO_AT_BRIDGE = 1
+# makefile (from 'makefile', line 5)
+SRC := src
 # environment
 GNOME_SHELL_SESSION_MODE = zorin
 # environment
@@ -25,7 +23,7 @@ PULSE_SERVER = unix:/run/flatpak/pulse/native
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d0b23095-00a2-44f8-b3fb-9ee2ebcbd5cc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-dffee3ef-583d-424a-815f-99cbc286e95d.sock
 # environment
 SBX_CHROME_API_RQ = 1
 # environment
@@ -49,7 +47,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/neto/djalv/Workspace
+PWD = /home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1
 # environment
 ZYPAK_ZYGOTE_STRATEGY_SPAWN = 1
 # automatic
@@ -81,7 +79,7 @@ MAKEFLAGS = pqrR
 # environment
 ZYPAK_SPAWN_LATEST_ON_REEXEC = 0
 # makefile
-CURDIR := /home/neto/djalv/Workspace
+CURDIR := /home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -104,8 +102,8 @@ XDG_CONFIG_DIRS = /app/etc/xdg:/etc/xdg
 ALSA_CONFIG_PATH = /usr/share/alsa/alsa-flatpak.conf
 # environment
 XDG_SESSION_DESKTOP = zorin
-# makefile (from 'Makefile', line 1)
-MAKEFILE_LIST := Makefile
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST := makefile
 # environment
 FLATPAK_SANDBOX_DIR = /home/neto/.var/app/com.visualstudio.code/sandbox
 # automatic
@@ -134,12 +132,16 @@ QT_QPA_PLATFORMTHEME = gtk3
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/flatpak/bus
+# makefile (from 'makefile', line 7)
+LIB := lib
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 __EGL_EXTERNAL_PLATFORM_CONFIG_DIRS = /etc/egl/egl_external_platform.d:/usr/lib/x86_64-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d
+# makefile (from 'makefile', line 6)
+INCLUDE := include
 # default
 MAKE_HOST := x86_64-unknown-linux-gnu
 # environment
@@ -196,7 +198,7 @@ DESKTOP_SESSION = zorin
 GST_PLUGIN_SYSTEM_PATH = /app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = zorin:GNOME
-# environment
+# 'override' directive
 GNUMAKEFLAGS := 
 # environment
 LOGNAME = neto
@@ -205,7 +207,7 @@ container = flatpak
 # environment
 GIO_LAUNCHED_DESKTOP_FILE = /var/lib/flatpak/exports/share/applications/com.visualstudio.code.desktop
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
 # environment
 NPM_CONFIG_GLOBALCONFIG = /app/etc/npmrc
 # environment
@@ -218,18 +220,25 @@ DISPLAY = :99.0
 MAKE_VERSION := 4.3
 # environment
 MANAGERPID = 2084
+# makefile (from 'makefile', line 9)
+EXECUTABLE := tp01
 # environment
 LC_MEASUREMENT = pt_BR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 27576
+GIO_LAUNCHED_DESKTOP_FILE_PID = 27236
 # environment
 QT_STYLE_OVERRIDE = adwaita
+# makefile (from 'makefile', line 2)
+CXX_FLAGS := -Wall -std=c++17 -ggdb -g -O3 -g
 # environment
+ 
 SSH_AGENT_PID = 2281
 # environment
 _ = /usr/bin/make
 # environment
 LC_PAPER = pt_BR.UTF-8
+# makefile (from 'makefile', line 4)
+BIN := bin
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -242,6 +251,8 @@ LC_CTYPE = pt_BR.UTF-8
 JOURNAL_STREAM = 8:44923
 # environment
 XDG_SESSION_CLASS = user
+# makefile (from 'makefile', line 8)
+LIBRARIES := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -268,6 +279,8 @@ VSCODE_CLI = 1
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'makefile', line 1)
+CXX := g++
 # environment
 FLATPAK_ID = com.visualstudio.code
 # environment
@@ -279,7 +292,7 @@ GDMSESSION = zorin
 # environment
 LC_IDENTIFICATION = pt_BR.UTF-8
 # variable set hash-table stats:
-# Load=133/1024=13%, Rehash=0, Collisions=10/144=7%
+# Load=140/1024=14%, Rehash=0, Collisions=21/181=12%
 
 # Pattern-specific Variable Values
 
@@ -287,10 +300,10 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 
 # Directories
 
- 
-# . (device 2066, inode 4589971): 8 files, no impossibilities.
+# src (device 2066, inode 4599093): 7 files, no impossibilities.
+# . (device 2066, inode 4598978): 8 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -298,11 +311,55 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 
 # Files
 
+bin/tp01: src/bike.cpp src/graph.cpp src/main.cpp src/map.cpp src/visitor.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-05-16 02:23:34.903793183
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := bin/tp01
+# automatic
+# * := 
+# automatic
+# < := src/bike.cpp
+# automatic
+# + := src/bike.cpp src/graph.cpp src/main.cpp src/map.cpp src/visitor.cpp
+# automatic
+# % := 
+# automatic
+# ^ := src/bike.cpp src/graph.cpp src/main.cpp src/map.cpp src/visitor.cpp
+# automatic
+# ? := src/map.cpp
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=6/18=33%
+#  recipe to execute (from 'makefile', line 20):
+	@echo "🚧 Building..."
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+
 # Not a target:
-Makefile:
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-15 23:52:41.536775581
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/graph.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 01:17:40.846955733
+#  File has been updated.
+#  Successfully updated.
+
+clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'makefile', line 24):
+	@echo "🧹 Clearing..."
+	-rm $(BIN)/*
 
 # Not a target:
 .DEFAULT:
@@ -310,27 +367,72 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-all:
+all: bin/tp01
 #  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+run: clean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 15):
+	clear
+	@echo "🚀 Executing..."
+	./$(BIN)/$(EXECUTABLE)
+
+# Not a target:
+src/bike.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-14 17:13:36.400764363
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/map.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 02:23:48.175648859
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 02:13:45.050202578
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/visitor.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-15 20:26:54.052170751
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/5=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/34=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 12 / storage = 97 B / avg = 8 B
-# current buf: size = 8162 B / used = 97 B / count = 12 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 218 B / avg = 8 B
+# current buf: size = 8162 B / used = 218 B / count = 25 / avg = 8 B
 
-# strcache performance: lookups = 16 / hit rate = 25%
+# strcache performance: lookups = 41 / hit rate = 39%
 # hash-table stats:
-# Load=12/8192=0%, Rehash=0, Collisions=0/16=0%
-# Finished Make data base on Mon May 16 03:03:32 2022
+# Load=25/8192=0%, Rehash=0, Collisions=0/41=0%
+# Finished Make data base on Mon May 16 02:23:56 2022
 
  

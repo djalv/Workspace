@@ -1,0 +1,10 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1/bin",
+            "binaryPath": "/home/neto/djalv/Workspace/UFMG-2022-1/Algoritmos1/TP's/TP1/bin/tp01",
+            "binaryArgs": []
+        }
+    ]
+}

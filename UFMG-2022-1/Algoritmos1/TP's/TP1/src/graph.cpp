@@ -30,6 +30,10 @@ void Graph::addEdge(int u, int v) {
 }
 
 vector <int> Graph::BFS(Node s) {
+    for(int i = 0; i < nodes.size(); i++) {
+        nodes[i].color = "White";
+    }
+    
     list <Node> q;
     list <Node> :: iterator v;
     

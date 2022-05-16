@@ -35,10 +35,12 @@ int main() {
             preferences[i][j] = number;
         }
     }
-    //m.createGraph();
-    //m.printGraph();
-    //m.setVisitorPreferences(preferences);
+    
+    m.setVisitorPreferences(preferences);
+    cout << endl;
     m.setBikePreferences();
+    cout << endl;
+    m.gale_shapley();
     file.close();
     return 0;
 }
