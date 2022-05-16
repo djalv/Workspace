@@ -8,23 +8,34 @@
 #include <iterator>
 #include "visitor.hpp"
 #include "bike.hpp"
+#include "graph.hpp"
 
 class Map {
     private:
         int n;
+        int rows;
+        int columns;
         vector <vector <char>> map;
+        Graph graph;
 
         vector <Visitor> visitors;
         vector <Bike> bikes;
 
-        vector <list <Visitor>> bikePreferences;
-        vector <list <Bike>> visitorPreferences;
+        vector <int> nodeVisitors;
+        vector <int> nodeBikes;
+
+        vector <vector <Visitor>> bikePreferences;
+        vector <vector <Bike>> visitorPreferences;
     public:
         Map(int n, int rows, int columns);
         void addItem(char c, int x, int y);
+        void createGraph();
         void setBikePreferences();
-        void setVisitorPreferences();
+        void setVisitorPreferences(vector <vector <int>> &preferences);
         void gale_shapley();
+
+        void printMap();
+        void printGraph();
 };
 
 #endif

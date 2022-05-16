@@ -7,6 +7,7 @@
 
 using namespace std;
 
+int distances[16];
 class Node {
     public:
         int node;
@@ -76,20 +77,21 @@ void Graph::BFS(Node s) {
     nodes[s.node].color = "Gray";
     nodes[s.node].dist = 0;
     nodes[s.node].parent = -1;
+    distances[s.node] = nodes[s.node].dist;
 
     q.push_back(s);
     while(!q.empty()) {
         u = q.front();
         q.pop_front();
         
-        cout << u.node << " ";
+        //cout << u.node << " ";
 
         for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
             if(nodes[(*v).node].color == "White") {
                 nodes[(*v).node].color = "Gray";
                 nodes[(*v).node].dist = nodes[u.node].dist + 1;;
                 nodes[(*v).node].parent = u.node;
-
+                distances[(*v).node] = nodes[u.node].dist + 1;
                 q.push_back(*v);
             }
         }
@@ -178,25 +180,44 @@ void Graph::topological_sort() {
 int main() {
     Node s(0);
     
-    Graph g(7);
-    g.addEdge(0,3);
-    g.addEdge(0,4);
-    g.addEdge(0,6);
+    Graph g(16);
+    g.addEdge(0,1);
     g.addEdge(1,2);
-    g.addEdge(1,4);
-    g.addEdge(1,5);
     g.addEdge(2,3);
-    g.addEdge(2,4);
-    g.addEdge(3,4);
-    g.addEdge(4,5);
-    g.addEdge(4,6);
-    g.addEdge(5,6);
+    g.addEdge(2,6);
+    g.addEdge(3,2);
+    g.addEdge(3,7);
+    g.addEdge(6,2);
+    g.addEdge(6,7);
+    g.addEdge(6,10);
+    g.addEdge(7,3);
+    g.addEdge(7,6);
+    g.addEdge(7,11);
+    g.addEdge(8,12);
+    g.addEdge(10,6);
+    g.addEdge(10,11);
+    g.addEdge(10,14);
+    g.addEdge(11,7);
+    g.addEdge(11,10);
+    g.addEdge(11,15);
+    g.addEdge(12,8);
+    g.addEdge(12,13);
+    g.addEdge(13,12);
+    g.addEdge(13,14);
+    g.addEdge(14,10);
+    g.addEdge(14,13);
+    g.addEdge(14,15);
+    g.addEdge(15,11);
+    g.addEdge(15,14);
 
-    
-    
-    //g.BFS(s);
+    g.BFS(0);
+
+    for(int i = 0; i < 16; i++) {
+        cout << distances[i] << " ";
+    }
+    cout << endl;
     //g.DFS();
 
-    g.topological_sort();
+    //g.topological_sort();
     return 0;
 }

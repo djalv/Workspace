@@ -1,7 +1,7 @@
 #ifndef BIKE_DJALV
 #define BIKE_DJALV
 
-#include "Loc.hpp"
+#include "loc.hpp"
 
 class Bike {
     private:
