@@ -78,7 +78,7 @@ vector <int> Graph::BFS(Node s) {
                 // calcula a distancia
                 
                 nodes[(*v).node].color = "Gray";
-                nodes[(*v).node].dist = nodes[u.node].dist + 1;;
+                nodes[(*v).node].dist = nodes[u.node].dist + 1;
                 nodes[(*v).node].parent = u.node;
                 distances[(*v).node] = nodes[u.node].dist + 1;
                 q.push_back(*v);
