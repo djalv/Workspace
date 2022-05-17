@@ -28,14 +28,13 @@ class Map {
         vector <vector <int>> visitorPreferences;
     public:
         Map(int n, int rows, int columns);
+        
         void addItem(char c, int x, int y);
         void createGraph();
+        
         void setBikePreferences();
         void setVisitorPreferences(vector <vector <int>> &preferences);
         void gale_shapley();
-
-        void printMap();
-        void printGraph();
 };
 
 #endif

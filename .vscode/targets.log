@@ -8,7 +8,7 @@ make: *** Makefile: Is a directory.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 16 03:03:32 2022
+# Make data base, printed on Mon May 16 22:19:35 2022
 
 # Variables
 
@@ -17,15 +17,13 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-NO_AT_BRIDGE = 1
-# environment
 GNOME_SHELL_SESSION_MODE = zorin
 # environment
 PULSE_SERVER = unix:/run/flatpak/pulse/native
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d0b23095-00a2-44f8-b3fb-9ee2ebcbd5cc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e6866ebe-3395-474d-9d32-e8871a6ff3f9.sock
 # environment
 SBX_CHROME_API_RQ = 1
 # environment
@@ -85,7 +83,7 @@ CURDIR := /home/neto/djalv/Workspace
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -125,7 +123,7 @@ XDG_DATA_HOME = /home/neto/.var/app/com.visualstudio.code/data
 # environment
 SANDBOX_LD_PRELOAD = /app/bin/../lib/libzypak-preload-host.so:/app/bin/../lib/libzypak-preload-host-spawn-strategy.so
 # environment
-SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2315,unix/djalvPC:/tmp/.ICE-unix/2315
+SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2308,unix/djalvPC:/tmp/.ICE-unix/2308
 # automatic
 *F = $(notdir $*)
 # environment
@@ -177,7 +175,7 @@ LC_TIME = pt_BR.UTF-8
 # environment
 XDG_CONFIG_HOME = /home/neto/.var/app/com.visualstudio.code/config
 # environment
-INVOCATION_ID = 4c3c9bf59b3842d09186a93fa362a3f6
+INVOCATION_ID = b35c14ada50d49e283f52a2adae56b3f
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -217,15 +215,15 @@ DISPLAY = :99.0
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2084
+MANAGERPID = 2075
 # environment
 LC_MEASUREMENT = pt_BR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 27576
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5198
 # environment
 QT_STYLE_OVERRIDE = adwaita
 # environment
-SSH_AGENT_PID = 2281
+SSH_AGENT_PID = 2274
 # environment
 _ = /usr/bin/make
 # environment
@@ -239,7 +237,7 @@ PULSE_CLIENTCONFIG = /run/flatpak/pulse/config
 # environment
 LC_CTYPE = pt_BR.UTF-8
 # environment
-JOURNAL_STREAM = 8:44923
+JOURNAL_STREAM = 8:44678
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -279,9 +277,10 @@ GDMSESSION = zorin
 # environment
 LC_IDENTIFICATION = pt_BR.UTF-8
 # variable set hash-table stats:
-# Load=133/1024=13%, Rehash=0, Collisions=10/144=7%
+# Load=132/1024=13%, Rehash=0, Collisions=10/143=7%
 
 # Pattern-specific Variable Values
+ 
 
 # No pattern-specific variable values.
 
@@ -331,6 +330,6 @@ all:
 # strcache performance: lookups = 16 / hit rate = 25%
 # hash-table stats:
 # Load=12/8192=0%, Rehash=0, Collisions=0/16=0%
-# Finished Make data base on Mon May 16 03:03:32 2022
+# Finished Make data base on Mon May 16 22:19:35 2022
 
  

@@ -142,15 +142,6 @@ void Map::setBikePreferences() {
             }
         }
     }
-
-    /*for(int i = 0; i < bikePreferences.size(); i++) {
-        cout << i << "| ";
-        for(int j = 0; j < bikePreferences[i].size(); j++) {
-            //char c = bikePreferences[i][j] + 97;
-            cout << bikePreferences[i][j] << " ";
-        }
-        cout << endl;
-    }*/
 }
 
 void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
@@ -198,14 +189,6 @@ void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
             }
         }
     }
-
-    /*for(int i = 0; i < visitorPreferences.size(); i++) {
-        cout << i << "| ";
-        for(int j = 0; j < visitorPreferences[i].size(); j++) {
-            cout << visitorPreferences[i][j] << " ";
-        }
-        cout << endl;
-    }*/
 }
 
 void range(list <int> &ls, int n) {
@@ -287,24 +270,4 @@ void Map::gale_shapley(){
         }
     }
     print(visitorPairs);
-}
-
-void Map::printMap() {
-    for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < columns; j++) {
-            cout << map[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
-void Map::printGraph() {
-    list <Node> :: iterator j;
-    for(int i = 0; i < rows*columns; i++) {
-        cout << i << "| ";
-        for(j = graph.adj[i].begin(); j != graph.adj[i].end(); j++) {
-            cout << (*j).node << " ";
-        }
-        cout << endl;
-    }
 }
