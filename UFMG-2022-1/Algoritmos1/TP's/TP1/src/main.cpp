@@ -2,8 +2,8 @@
 #include <fstream>
 #include "map.hpp"
 
-int main() {
-    ifstream file("test.txt");
+int main(int argc, char *argv[]) {
+    ifstream file(argv[1]);
     vector <vector <int>> preferences;
     
     int n, rows, columns;

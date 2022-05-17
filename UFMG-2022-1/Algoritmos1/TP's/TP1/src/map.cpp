@@ -2,6 +2,7 @@
 #include <queue>
 #include "map.hpp"
 
+// Funçao construtora do mapa
 Map::Map(int n, int rows, int columns) {
     this->n = n;
     this->rows = rows;
@@ -26,12 +27,14 @@ Map::Map(int n, int rows, int columns) {
     }   
 }
 
+// Adiciona um item ao mapa
 void Map::addItem(char c, int x, int y) {
     if(x < rows && x >= 0 && y < columns && y >= 0) {
         int k = c;
         int idx;
         map[x][y] = c;
-
+        
+        // Adiciona as visitas e as bikes em um vetor
         if(c >= 'a' && c <= 'j') {
             idx = k - 97;
             visitors[idx].addVisitor(c, x, y);
@@ -43,10 +46,12 @@ void Map::addItem(char c, int x, int y) {
     }
 }
 
+// Cria um grafo de acordo com o mapa
 void Map::createGraph() {
     int node = 0;
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < columns; j++) {
+            // Armazena quais são os nós das visitas e das bikes
             if(map[i][j] >= 'a' && map[i][j] <= 'j') {
                 nodeVisitors.push_back(node);
             }
@@ -54,8 +59,12 @@ void Map::createGraph() {
                 nodeBikes.push_back(node);
             }
             
+            // Adiciona o simbolo lido ao rotulo do nó
             graph.nodes[node].label = map[i][j];
             
+            // Adiciona as arestas aos nós
+            // Se o nó for uma (-) 
+            // não aprensentará arestas
             if(map[i][j] != '-') {
                 if(j-1 >= 0 && map[i][j-1] != '-') {
                     graph.addEdge(node, node-1);
@@ -75,6 +84,7 @@ void Map::createGraph() {
     }
 }
 
+// Cria a lista de preferencias das bikes
 void Map::setBikePreferences() {
     createGraph();
     vector <vector <int>> distances;
@@ -84,6 +94,7 @@ void Map::setBikePreferences() {
         distances[i].resize(n);
     }
     
+    // Calcula as distancias das bikes até as visitas
     for(int i = 0; i < nodeBikes.size(); i++) {
         vector <int> temp;
         int bike = nodeBikes[i];
@@ -99,12 +110,14 @@ void Map::setBikePreferences() {
         }
     }
 
+    // Adiciona as ids na listas de preferencias
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             bikePreferences[i][j] = visitors[j].id;
         }
     }
 
+    // Selection sort para ordenar as distancias junto com as listas de preferencias
     int i, j, min_idx;
     for(int k = 0; k < n; k++) {
         for(i = 0; i < n-1; i++) {
@@ -124,6 +137,7 @@ void Map::setBikePreferences() {
         }
     }
 
+    // Aplica a regra de desempate
     for(int k = 0; k < n; k++) {
         for(i = 0; i < n-1; i++) {
             for(j = i+1; j < n; j++) {
@@ -144,15 +158,18 @@ void Map::setBikePreferences() {
     }
 }
 
+// Cria a lista de preferencias das visitas
 void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
     int i, j, min_idx;
-
+    
+    // Adiciona as ids na listas de preferencias
     for(i = 0; i < n; i++) {
         for(j = 0; j < n; j++) {
             visitorPreferences[i][j] = bikes[j].id;
         }
     }
 
+    // Selection sort para ordenar os graus de preferencias junto com as listas de preferencias
     for(int k = 0; k < n; k++) {
         for(i = 0; i < n-1; i++) {
             min_idx = i;
@@ -171,6 +188,7 @@ void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
         }
     }
 
+    // Aplica a regra de desempate
     for(int k = 0; k < n; k++) {
         for(i = 0; i < n-1; i++) {
             for(j = i+1; j < n; j++) {
@@ -191,12 +209,15 @@ void Map::setVisitorPreferences(vector <vector <int>> &preferences) {
     }
 }
 
+// Implementação do Gale Shapley
+// Funçao para preencher uma lista sequencialmente (0 -> n)
 void range(list <int> &ls, int n) {
     for(int i = 0; i < n; i++) {
         ls.push_back(i);
     }
 }
 
+// Função para preencher um array com 0 ou -1
 void fill(vector <int> &v, int n, bool zero = false) {
     int x = 0;
     
@@ -222,6 +243,7 @@ void Map::gale_shapley(){
     int rank[n][n];
     int visitor, bike, nextBike, currentPair, currentPairRank, visitorRank;
 
+    // Cria a matriz com os ranks das visitas
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             rank[i][bikePreferences[i][j]] = j+1;
