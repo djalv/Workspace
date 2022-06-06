@@ -8,17 +8,26 @@
 using namespace std;
 
 int distances[16];
+
 class Node {
     public:
         int node;
         int dist;
-        int parent;
         int iniTime;
         int finalTime;
-    
+        int subSet;
+
+        Node *parent;
         string color;
 
         Node(int node);
+
+        friend bool operator<(Node const &l, Node const &r) {
+            if(l.node < r.node) {
+                return true;
+            }
+            return false;
+        }
 };
 
 class Graph {
@@ -29,10 +38,12 @@ class Graph {
 
         vector <Node> nodes;
         vector <list <Node>> adj;
+        vector <vector <int>> weight;
+        
     public:
         Graph(int n);
 
-        void addEdge(int u, int v);
+        void addEdge(int u, int v, int w);
 
         void BFS(Node s);
         
@@ -40,23 +51,42 @@ class Graph {
         void DFS_visit(Node u);
 
         void topological_sort();
+
+        void mstKruskal();
+};
+
+class Sets {
+    private:
+        vector <list <Node>> s;
+        int n;
+    public:
+        Sets(int n);
+        void makeSet(Node x);
+        void unionSets(Node &x, Node &y);
+        
+        Node findSet(Node x);
+        
+        void printSets();
 };
 
 Node::Node(int node) {
     this->node = node;
     color = "White";
     dist = -1;
-    parent = -1;
+    parent = nullptr;
     iniTime = -1;
     finalTime = -1;
+    subSet = node;
 }
 
 Graph::Graph(int n) {
     Node v(-1);
     
+    weight.resize(n);
     for(int i = 0; i < n; i++) {
         Node v(i);
         nodes.push_back(v);
+        weight[i].resize(n);
     }
 
     this-> n = n;
@@ -64,19 +94,25 @@ Graph::Graph(int n) {
     isDAG = true;
 }
 
-void Graph::addEdge(int u, int v) {
+void Graph::addEdge(int u, int v, int w=0) {
     Node x(v);
     adj[u].push_back(x);
+    weight[u][v] = w;
+    weight[v][u] = w;
 }
 
 void Graph::BFS(Node s) {
     list <Node> q;
     list <Node> :: iterator v;
     Node u(-1);
+    
+    for(int i = 0; i < nodes.size(); i++) {
+        nodes[i].color = "White";
+    }
 
     nodes[s.node].color = "Gray";
     nodes[s.node].dist = 0;
-    nodes[s.node].parent = -1;
+    nodes[s.node].parent = nullptr;
     distances[s.node] = nodes[s.node].dist;
 
     q.push_back(s);
@@ -90,7 +126,7 @@ void Graph::BFS(Node s) {
             if(nodes[(*v).node].color == "White") {
                 nodes[(*v).node].color = "Gray";
                 nodes[(*v).node].dist = nodes[u.node].dist + 1;;
-                nodes[(*v).node].parent = u.node;
+                nodes[(*v).node].parent = &u;
                 distances[(*v).node] = nodes[u.node].dist + 1;
                 q.push_back(*v);
             }
@@ -106,7 +142,7 @@ void Graph::DFS() {
     
     for(u = nodes.begin(); u != nodes.end(); u++) {
         (*u).color = "White";
-        (*u).parent = -1;
+        (*u).parent = nullptr;
     }
     
     for(u = nodes.begin(); u != nodes.end(); u++) {
@@ -139,7 +175,7 @@ void Graph::DFS_visit(Node u) {
             isDAG = false;
         }
         else if(nodes[(*v).node].color == "White") {
-            nodes[(*v).node].parent = u.node;
+            nodes[(*v).node].parent = &u;
             //cout << "(" << u.node << ", " << (*v).node << ") é uma aresta de arvore" << endl;
             //cout << (*v).node << " ";
             DFS_visit(*v);
@@ -175,6 +211,48 @@ void Graph::topological_sort() {
         }
     }
     cout << endl;
+}
+
+Sets::Sets(int n) {
+    this->n = n;
+    s.resize(n);
+}
+
+void Sets::makeSet(Node x) {
+    s[x.node].push_back(x);
+    x.subSet = x.node;
+}
+
+Node Sets::findSet(Node x) {
+    return s[x.subSet].front();
+}
+
+void Sets::unionSets(Node &x, Node &y) {
+    s[x.subSet].merge(s[y.subSet]);
+    y.subSet = x.subSet;
+}
+
+void Sets::printSets() {
+    list <Node> :: iterator it;
+    for(int i = 0; i < s.size(); i++) {
+        for(it = s[i].begin(); it != s[i].end(); it++) {
+            cout << (*it).node << " ";
+        }
+        cout << endl;
+    }
+}
+
+void Graph::mstKruskal() {
+    Sets A(n);
+    list <Node> q;
+    list <Node> :: iterator v;
+    Node u(-1);
+
+    for(int i = 0; i < n; i++) {
+        A.makeSet(nodes[i]);
+    }
+    //Ordenar as arestas de acordo com o peso com o mergesort
+    
 }
 
 int main() {
@@ -219,5 +297,8 @@ int main() {
     //g.DFS();
 
     //g.topological_sort();
+    
+    //g.mstKruskal();
+
     return 0;
 }
