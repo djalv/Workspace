@@ -8,5 +8,5 @@ def euclides(a,b):
 
     return (g,y,x-q*y)
 
-print(euclides(5,216))
+print(euclides(3,11))
 
