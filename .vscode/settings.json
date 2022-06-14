@@ -13,6 +13,7 @@
         "iostream": "cpp",
         "*.tcc": "cpp",
         "fstream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "iterator": "cpp"
     }
 }

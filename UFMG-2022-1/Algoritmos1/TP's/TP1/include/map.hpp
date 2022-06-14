@@ -8,7 +8,7 @@
 #include <iterator>
 #include "visitor.hpp"
 #include "bike.hpp"
-#include "graph.hpp"
+#include "graphTP.hpp"
 
 class Map {
     private:

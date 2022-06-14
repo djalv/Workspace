@@ -1,5 +1,5 @@
 #include <iostream>
-#include "graph.hpp"
+#include "graphTP.hpp"
 
 // Função construtora classe Node
 Node::Node(int node) {

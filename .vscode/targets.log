@@ -8,7 +8,7 @@ make: *** Makefile: Is a directory.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun  6 15:49:53 2022
+# Make data base, printed on Tue Jun 14 19:40:30 2022
 
 # Variables
 
@@ -23,7 +23,7 @@ PULSE_SERVER = unix:/run/flatpak/pulse/native
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-55c59c97-177b-45ff-8093-ad585c77b02f.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-edeb6eb6-94c0-47ce-abb7-ee5b9351cd07.sock
 # environment
 SBX_CHROME_API_RQ = 1
 # environment
@@ -123,7 +123,7 @@ XDG_DATA_HOME = /home/neto/.var/app/com.visualstudio.code/data
 # environment
 SANDBOX_LD_PRELOAD = /app/bin/../lib/libzypak-preload-host.so:/app/bin/../lib/libzypak-preload-host-spawn-strategy.so
 # environment
-SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2339,unix/djalvPC:/tmp/.ICE-unix/2339
+SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2360,unix/djalvPC:/tmp/.ICE-unix/2360
 # automatic
 *F = $(notdir $*)
 # environment
@@ -175,7 +175,7 @@ LC_TIME = pt_BR.UTF-8
 # environment
 XDG_CONFIG_HOME = /home/neto/.var/app/com.visualstudio.code/config
 # environment
-INVOCATION_ID = f41958d28d0943ad934f4ad6f24cd431
+INVOCATION_ID = 87f1a9e8bd544526875bd8018a47df6e
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -215,15 +215,15 @@ DISPLAY = :99.0
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2108
+MANAGERPID = 2127
 # environment
 LC_MEASUREMENT = pt_BR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 9698
+GIO_LAUNCHED_DESKTOP_FILE_PID = 8161
 # environment
 QT_STYLE_OVERRIDE = adwaita
 # environment
-SSH_AGENT_PID = 2305
+SSH_AGENT_PID = 2326
 # environment
 _ = /usr/bin/make
 # environment
@@ -237,7 +237,7 @@ PULSE_CLIENTCONFIG = /run/flatpak/pulse/config
 # environment
 LC_CTYPE = pt_BR.UTF-8
 # environment
-JOURNAL_STREAM = 8:46648
+JOURNAL_STREAM = 8:45799
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -280,7 +280,6 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 # Load=132/1024=13%, Rehash=0, Collisions=10/143=7%
 
 # Pattern-specific Variable Values
- 
 
 # No pattern-specific variable values.
 
@@ -293,6 +292,7 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 # Implicit Rules
 
 # No implicit rules.
+ 
 
 # Files
 
@@ -329,6 +329,6 @@ all:
 # strcache performance: lookups = 16 / hit rate = 25%
 # hash-table stats:
 # Load=12/8192=0%, Rehash=0, Collisions=0/16=0%
-# Finished Make data base on Mon Jun  6 15:49:53 2022
+# Finished Make data base on Tue Jun 14 19:40:30 2022
 
  

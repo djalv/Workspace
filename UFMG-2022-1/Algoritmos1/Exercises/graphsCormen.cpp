@@ -17,6 +17,9 @@ class Node {
         int finalTime;
         int subSet;
 
+        int d; // Estimativa de custo minino
+        Node *p; // Nó parente na arvore de caminhos minimos
+
         Node *parent;
         string color;
 
@@ -29,6 +32,7 @@ class Node {
             return false;
         }
 };
+
 
 class Graph {
     private:
@@ -53,6 +57,13 @@ class Graph {
         void topological_sort();
 
         void mstKruskal();
+
+        void initSingleSource(Node s);
+        void relax(Node &u, Node &v);
+
+        void printMinimunPath();
+        bool bellmanFord(Node s);
+
 };
 
 class Sets {
@@ -255,50 +266,80 @@ void Graph::mstKruskal() {
     
 }
 
+void Graph::initSingleSource(Node s) {
+    vector <Node> ::iterator it;
+    for(it = nodes.begin(); it != nodes.end(); it++) {
+        (*it).d = 2147483647;
+        (*it).p = nullptr;
+    }
+    nodes[s.node].d = 0;
+}
+
+void Graph::relax(Node &u, Node &v) {
+    if(nodes[v.node].d > nodes[u.node].d + weight[u.node][v.node]) {
+        nodes[v.node].d = nodes[u.node].d + weight[u.node][v.node];
+        nodes[v.node].p = &u;
+    }
+}
+
+void Graph::printMinimunPath() {
+    for(int i = 0; i < nodes.size(); i++) {
+        cout << "No = " << nodes[i].node << " d = " << nodes[i].d << endl;
+    }
+
+    /*for(int i = 0; i < nodes.size(); i++) {
+        cout << "No = " << nodes[i].node << "p = " << nodes[i].p->node << endl;
+    }*/
+}
+
+bool Graph::bellmanFord(Node s) {
+    list <Node> q;
+    list <Node> :: iterator v;
+    Node u(-1);
+
+    initSingleSource(s);
+    //for(int cont = 0; cont < n-1; cont++) {
+        for(int i = 0; i < n; i++) {
+            u = nodes[i];
+            for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
+                relax(u, *v);
+            }
+        }
+    //}
+    printMinimunPath();
+    for(int i = 0; i < n; i++) {
+        u = nodes[i];
+        for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
+            if(nodes[(*v).node].d > nodes[u.node].d + weight[u.node][(*v).node]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 int main() {
     Node s(0);
     
-    Graph g(16);
-    g.addEdge(0,1);
-    g.addEdge(1,2);
-    g.addEdge(2,3);
-    g.addEdge(2,6);
-    g.addEdge(3,2);
-    g.addEdge(3,7);
-    g.addEdge(6,2);
-    g.addEdge(6,7);
-    g.addEdge(6,10);
-    g.addEdge(7,3);
-    g.addEdge(7,6);
-    g.addEdge(7,11);
-    g.addEdge(8,12);
-    g.addEdge(10,6);
-    g.addEdge(10,11);
-    g.addEdge(10,14);
-    g.addEdge(11,7);
-    g.addEdge(11,10);
-    g.addEdge(11,15);
-    g.addEdge(12,8);
-    g.addEdge(12,13);
-    g.addEdge(13,12);
-    g.addEdge(13,14);
-    g.addEdge(14,10);
-    g.addEdge(14,13);
-    g.addEdge(14,15);
-    g.addEdge(15,11);
-    g.addEdge(15,14);
+    Graph g(5);
+    g.addEdge(0,1,6);
+    g.addEdge(0,3,7);
+    g.addEdge(1,2,5);
+    g.addEdge(1,3,8);
+    g.addEdge(1,4,-4);
+    g.addEdge(2,1,-2);
+    g.addEdge(3,2,-3);
+    g.addEdge(3,4,9);
+    g.addEdge(4,2,7);
+    g.addEdge(4,0,2);
 
-    g.BFS(0);
-
-    for(int i = 0; i < 16; i++) {
-        cout << distances[i] << " ";
-    }
-    cout << endl;
-    //g.DFS();
-
-    //g.topological_sort();
+    bool mt = g.bellmanFord(s);
     
-    //g.mstKruskal();
+    /*cout << mt;
+
+    if(mt) {
+        g.printMinimunPath();
+    }*/
 
     return 0;
 }
