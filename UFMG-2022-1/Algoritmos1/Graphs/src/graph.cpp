@@ -207,23 +207,27 @@ void Graph::DAG_ShortestPath(Node s) {
 void Graph::dijkstra(Node s) {
     list <Node> set;
     list <Node> :: iterator v;
-    priority_queue <Node, vector <Node>, greater <Node> > q;
+    Heap q(n);
     Node u;
 
     initSingleSource(s);
     
     for(int i = 0; i < n; i++) {
         u = nodes[i];
-        q.push(u);
+        q.insert(u);
     }
 
-    while(!q.empty()) {
-        u = q.top();
-        q.pop();
+    while(q.size > 0) {
+        u = q.extractMin();
         set.push_back(u);
 
         for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
-            relax(u, *v);
+            if(nodes[(*v).node].d > nodes[u.node].d + weight[u.node][(*v).node]) {
+                nodes[(*v).node].d = nodes[u.node].d + weight[u.node][(*v).node];
+                nodes[(*v).node].p = nodes[u.node].node;
+
+                q.decreaseKey(nodes[(*v).node].node, nodes[(*v).node].d);
+            }
         }
     }
 }

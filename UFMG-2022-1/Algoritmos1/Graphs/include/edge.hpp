@@ -13,6 +13,7 @@ class Edge {
         int w; // weight
 
         Edge(Node *u, Node *v, int w);
+        Edge();
 };
 
 #endif

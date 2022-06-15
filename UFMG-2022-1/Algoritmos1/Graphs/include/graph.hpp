@@ -9,6 +9,7 @@
 #include <string>
 #include "node.hpp"
 #include "edge.hpp"
+#include "heap.hpp"
 
 using namespace std;
 
