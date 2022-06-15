@@ -11,8 +11,9 @@ class Edge {
         Node *u;
         Node *v;
         int w; // weight
+        int f; // flux
 
-        Edge(Node *u, Node *v, int w);
+        Edge(Node *u, Node *v, int w, int f);
         Edge();
 };
 

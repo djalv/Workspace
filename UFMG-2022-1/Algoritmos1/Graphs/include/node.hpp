@@ -28,6 +28,13 @@ class Node {
             }
             return false;
         }
+
+        friend bool operator==(Node const &l, Node const &r) {
+            if(l.node == r.node) {
+                return true;
+            }
+            return false;
+        }
 };
 
 #endif

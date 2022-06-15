@@ -24,14 +24,24 @@ class Graph {
         vector <Edge> edges;
         
         vector <list <Node>> adj;
+        vector <vector <int>> matAdj;
         vector <vector <int>> weight;
+        vector <vector <int>> flux;
+
+        vector <Node> path;
         
     public:
         Graph(int n);
 
-        void addEdge(int u, int v, int w);
+        void clearGraph();
+
+        void addEdge(int u, int v, int w=0, int f=0);
+        void deleteEdge(Edge uv);
 
         void BFS(Node s);
+        bool BFS(Node s, Node t);
+
+        void printPath();
         
         void DFS();
         void DFS_visit(Node u);
@@ -49,6 +59,8 @@ class Graph {
         void DAG_ShortestPath(Node s);
 
         void dijkstra(Node s);
+        
+        int fordFulkerson(Node s, Node t);
 };
 
 #endif

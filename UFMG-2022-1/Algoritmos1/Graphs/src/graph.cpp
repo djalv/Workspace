@@ -2,11 +2,16 @@
 
 Graph::Graph(int n) {
     weight.resize(n);
+    flux.resize(n);
+    matAdj.resize(n);
+    path.resize(n);
 
     for(int i = 0; i < n; i++) {
         Node v(i);
         nodes.push_back(v);
         weight[i].resize(n);
+        flux[i].resize(n);
+        matAdj[i].resize(n);
     }
 
     this->m = 0;
@@ -15,18 +20,55 @@ Graph::Graph(int n) {
     isDAG = true;
 }
 
+void Graph::clearGraph() {
+    edges.clear();
 
-void Graph::addEdge(int u, int v, int w=0) {
+    for(int i = 0; i < n; i++) {
+        adj[i].clear();
+        matAdj[i].clear();
+        weight[i].clear();
+        flux[i].clear();
+    }
+    m = 0;
+    /*adj.clear();
+    matAdj.clear();
+    weight.clear();
+    flux.clear();*/
+}
+
+void Graph::addEdge(int u, int v, int w, int f) {
     Node *x = &nodes[u];
     Node *y = &nodes[v];
     
-    Edge xy(x, y, w);
+    Edge xy(x, y, w, f);
 
     edges.push_back(xy);
     adj[u].push_back(*y);
-    
+    matAdj[u][v] = 1;
+    flux[u][v] = f;
     weight[u][v] = w;
     m++;
+}
+
+void Graph::deleteEdge(Edge uv){
+    Node *u = uv.u;
+    Node *v = uv.v;
+
+    vector <Edge> ::iterator x;
+    
+    for(x = edges.begin(); x != edges.end(); x++) {
+        if((*x).u->node == u->node && (*x).v->node == v->node) {
+            edges.erase(x);
+            break;
+        }
+    }
+
+    adj[u->node].remove(*v);
+    matAdj[u->node][v->node] = 0;
+    weight[u->node][v->node] = 0;
+    flux[u->node][v->node] = 0;
+
+    m = m - 1;
 }
 
 void Graph::BFS(Node s) {
@@ -36,7 +78,6 @@ void Graph::BFS(Node s) {
     distances.resize(n);
     
     Node u;
-    
     
     for(int i = 0; i < nodes.size(); i++) {
         nodes[i].color = "White";
@@ -66,6 +107,47 @@ void Graph::BFS(Node s) {
         nodes[u.node].color = "Black";
     }
     cout << endl;
+}
+
+bool Graph::BFS(Node s, Node t) {
+    list <Node> q;
+    list <Node> :: iterator v;
+    vector <int> distances;
+    distances.resize(n);
+    
+    Node u;
+    
+    for(int i = 0; i < nodes.size(); i++) {
+        nodes[i].color = "White";
+    }
+
+    nodes[s.node].color = "Gray";
+    nodes[s.node].dist = 0;
+    nodes[s.node].parent = -1;
+    distances[s.node] = nodes[s.node].dist;
+
+    q.push_back(s);
+    while(!q.empty()) {
+        u = q.front();
+        q.pop_front();
+        
+        for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
+            if(nodes[(*v).node].color == "White") {
+                nodes[(*v).node].color = "Gray";
+                nodes[(*v).node].dist = nodes[u.node].dist + 1;;
+                nodes[(*v).node].parent = u.node;
+                distances[(*v).node] = nodes[u.node].dist + 1;
+                path[(*v).node] = nodes[u.node];
+
+                if((*v).node == t.node) {
+                    return true;
+                }
+                q.push_back(*v);
+            }
+        }
+        nodes[u.node].color = "Black";
+    }
+    return false;
 }
 
 void Graph::DFS() {
@@ -230,4 +312,97 @@ void Graph::dijkstra(Node s) {
             }
         }
     }
+}
+
+int Graph::fordFulkerson(Node s, Node t) {
+    Graph rGraph(n);
+    Node *u, *v;
+
+    vector <Edge> edgePath;
+    vector <int> capacity;
+
+    int c1;
+    int maxFlow = 0;
+
+    for(int i = 0; i < m; i++) {
+        u = edges[i].u;
+        v = edges[i].v;
+
+        if(matAdj[u->node][v->node] == 1) {
+            c1 = weight[u->node][v->node] - edges[i].f;
+            
+            if(edges[i].f > 0) {
+                rGraph.addEdge(v->node, u->node, edges[i].f);
+            }
+
+            if(c1 > 0) {
+                rGraph.addEdge(u->node, v->node, c1);
+            }
+        }
+    }
+
+    for(int i = 0; i < m; i++) {
+        edges[i].f = 0;
+    }
+    
+    while(rGraph.BFS(s, t) == 1) {
+        vector <Node> augPath;
+        augPath.push_back(t);
+
+        Node k = rGraph.path[t.node];
+        while(k.node != -1) {
+            augPath.push_back(k);
+            k = rGraph.path[k.node];
+        }
+
+        for(int i = 0; i < augPath.size() - 1; i++) {
+            int cap = rGraph.weight[augPath[i+1].node][augPath[i].node];
+            capacity.push_back(cap);
+            
+            Edge x(&augPath[i+1], &augPath[i], cap, 0);
+            edgePath.push_back(x);
+        }
+        
+        int minCap = capacity[0];
+        for(int i = 0; i < capacity.size() - 1; i++) {
+            if(minCap > capacity[i]) {
+                minCap = capacity[i];
+            }
+        }
+        for(int i = 0; i < edgePath.size(); i++) {
+            Node *q = edgePath[i].u;
+            Node *r = edgePath[i].v;
+            int f = flux[q->node][r->node];
+
+
+            if(matAdj[q->node][r->node] == 1) {
+                flux[q->node][r->node] += minCap;
+            }
+            else {
+                flux[r->node][q->node] -= minCap;
+            }
+        }
+
+        rGraph.clearGraph();
+        for(int i = 0; i < m; i++) {
+            u = edges[i].u;
+            v = edges[i].v;
+
+            if(matAdj[u->node][v->node] == 1) {
+                c1 = weight[u->node][v->node] - flux[u->node][v->node];
+            
+                if(flux[u->node][v->node] > 0) {
+                    rGraph.addEdge(v->node, u->node, flux[u->node][v->node]);
+                }
+
+                if(c1 > 0) {
+                    rGraph.addEdge(u->node, v->node, c1);
+                }
+            }
+        }
+    }
+    for(int i = 0; i < n; i++) {
+        maxFlow += flux[0][i];
+    }
+    return maxFlow;
 }
