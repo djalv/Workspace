@@ -7,6 +7,7 @@
 #include <string>
 #include <cmath>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -198,6 +199,7 @@ class Graph {
         void addEdge(int u, int v, int w=0) {
             Node *x = &nodes[u];
             Node *y = &nodes[v];
+            nodes[v].d = w;
             Edge xy(x, y, w);
 
             edges.push_back(xy);
@@ -223,43 +225,32 @@ class Graph {
             }
         }
 
-        void dijkstra(Node s) {
-            list <Node> set;
+        int dijkstra(Node s, Node t) {
             list <Node> :: iterator v;
-            Heap q(n);
-            Node u;
+            vector <int> widest(n, -2147483647);
+            vector <int> path(n, 0);
+            Heap pq(n);
 
-            initSingleSource(s);
+            widest[s.node] = 2147483647;
+            nodes[s.node].d = 0;
 
-            for(int i = 0; i < n; i++) {
-                u = nodes[i];
-                q.insert(u);
-            }
+            pq.insert(nodes[s.node]);
 
-            while(q.size > 0) {
-                u = q.extractMin();
-                set.push_back(u);
-                //if(!nodes[u.node].visited) {
-                    path.push_back(u.node);
-                //}
+            while(pq.size > 0) {
+                Node u = nodes[pq.extractMin().node];
 
                 for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
-                    if(nodes[(*v).node].visited == false && nodes[(*v).node].d > nodes[u.node].d + weight[u.node][(*v).node]) {
-                        nodes[(*v).node].d = nodes[u.node].d + weight[u.node][(*v).node];
-                        nodes[(*v).node].p = nodes[u.node].node;
+                    int dstc = max(widest[(*v).node], min(widest[u.node], weight[u.node][(*v).node]));
 
-                        q.decreaseKey(nodes[(*v).node].node, nodes[(*v).node].d);
+                    if(dstc > widest[(*v).node]) {
+                        widest[(*v).node] = dstc;
+                        path[(*v).node] = u.node;
+
+                        pq.insert(nodes[(*v).node]);
                     }
                 }
             }
-        }
-
-        int maxiMini(int x, int y) {
-            Node s = nodes[x];
-            Node t = nodes[y];
-
-            
-            return 0;
+            return widest[t.node];
         }
 };
 
@@ -268,7 +259,7 @@ int main() {
     int u, v, w;
     int city1, city2;
 
-    ifstream file("test2.txt");
+    ifstream file("test1.txt");
 
     file >> n >> m >> q;
 
@@ -279,10 +270,10 @@ int main() {
         g.addEdge(u-1, v-1, w);
     }
 
-    //for(int i = 0; i < q; i++) {
+    for(int i = 0; i < q; i++) {
         file >> city1 >> city2;
-        cout << g.maxiMini(city1-1, city2-1) << endl;
-    //}
+        cout << g.dijkstra(city1-1, city2-1) << endl;
+    }
     
     file.close();
     return 0;

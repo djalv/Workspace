@@ -317,6 +317,10 @@ void Graph::dijkstra(Node s) {
             }
         }
     }
+    for(v = set.begin(); v != set.end(); v++) {
+        cout << (*v).d << " ";
+    }
+    cout << endl;
 }
 
 int Graph::fordFulkerson(Node s, Node t) {
