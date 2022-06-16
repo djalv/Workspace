@@ -28,7 +28,7 @@ class Graph {
         vector <vector <int>> weight;
         vector <vector <int>> flux;
 
-        vector <Node> path;
+        vector <Node> tree;
         
     public:
         Graph(int n);

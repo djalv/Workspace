@@ -4,7 +4,7 @@ Graph::Graph(int n) {
     weight.resize(n);
     flux.resize(n);
     matAdj.resize(n);
-    path.resize(n);
+    tree.resize(n);
 
     for(int i = 0; i < n; i++) {
         Node v(i);
@@ -30,10 +30,6 @@ void Graph::clearGraph() {
         flux[i].clear();
     }
     m = 0;
-    /*adj.clear();
-    matAdj.clear();
-    weight.clear();
-    flux.clear();*/
 }
 
 void Graph::addEdge(int u, int v, int w, int f) {
@@ -55,15 +51,20 @@ void Graph::deleteEdge(Edge uv){
     Node *v = uv.v;
 
     vector <Edge> ::iterator x;
+    list <Node> ::iterator it;
     
     for(x = edges.begin(); x != edges.end(); x++) {
         if((*x).u->node == u->node && (*x).v->node == v->node) {
             edges.erase(x);
-            break;
         }
     }
 
-    adj[u->node].remove(*v);
+    for(it = adj[u->node].begin(); it != adj[u->node].end(); it++){
+        if((*it) == *v) {
+            adj[u->node].erase(it);
+            it = adj[u->node].end();
+        }
+    }
     matAdj[u->node][v->node] = 0;
     weight[u->node][v->node] = 0;
     flux[u->node][v->node] = 0;
@@ -112,9 +113,11 @@ void Graph::BFS(Node s) {
 bool Graph::BFS(Node s, Node t) {
     list <Node> q;
     list <Node> :: iterator v;
+    vector <Node> ::iterator x;
+
     vector <int> distances;
     distances.resize(n);
-    
+
     Node u;
     
     for(int i = 0; i < nodes.size(); i++) {
@@ -125,19 +128,21 @@ bool Graph::BFS(Node s, Node t) {
     nodes[s.node].dist = 0;
     nodes[s.node].parent = -1;
     distances[s.node] = nodes[s.node].dist;
+    tree[0] = u;
 
     q.push_back(s);
     while(!q.empty()) {
         u = q.front();
         q.pop_front();
-        
+
         for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
             if(nodes[(*v).node].color == "White") {
                 nodes[(*v).node].color = "Gray";
                 nodes[(*v).node].dist = nodes[u.node].dist + 1;;
                 nodes[(*v).node].parent = u.node;
                 distances[(*v).node] = nodes[u.node].dist + 1;
-                path[(*v).node] = nodes[u.node];
+
+                tree[(*v).node] = u;
 
                 if((*v).node == t.node) {
                     return true;
@@ -318,41 +323,27 @@ int Graph::fordFulkerson(Node s, Node t) {
     Graph rGraph(n);
     Node *u, *v;
 
-    vector <Edge> edgePath;
-    vector <int> capacity;
-
     int c1;
     int maxFlow = 0;
 
     for(int i = 0; i < m; i++) {
         u = edges[i].u;
         v = edges[i].v;
+        int w = edges[i].w;
 
-        if(matAdj[u->node][v->node] == 1) {
-            c1 = weight[u->node][v->node] - edges[i].f;
-            
-            if(edges[i].f > 0) {
-                rGraph.addEdge(v->node, u->node, edges[i].f);
-            }
-
-            if(c1 > 0) {
-                rGraph.addEdge(u->node, v->node, c1);
-            }
-        }
+        rGraph.addEdge(u->node, v->node, w);
     }
 
-    for(int i = 0; i < m; i++) {
-        edges[i].f = 0;
-    }
-    
-    while(rGraph.BFS(s, t) == 1) {
+    while(rGraph.BFS(s, t)) {
         vector <Node> augPath;
+        vector <Edge> edgePath;
+        vector <int> capacity;
         augPath.push_back(t);
 
-        Node k = rGraph.path[t.node];
+        Node k = rGraph.tree[t.node];
         while(k.node != -1) {
             augPath.push_back(k);
-            k = rGraph.path[k.node];
+            k = rGraph.tree[k.node];
         }
 
         for(int i = 0; i < augPath.size() - 1; i++) {
@@ -362,47 +353,40 @@ int Graph::fordFulkerson(Node s, Node t) {
             Edge x(&augPath[i+1], &augPath[i], cap, 0);
             edgePath.push_back(x);
         }
-        
+
         int minCap = capacity[0];
         for(int i = 0; i < capacity.size() - 1; i++) {
             if(minCap > capacity[i]) {
                 minCap = capacity[i];
             }
         }
-        for(int i = 0; i < edgePath.size(); i++) {
-            Node *q = edgePath[i].u;
-            Node *r = edgePath[i].v;
-            int f = flux[q->node][r->node];
 
+        for(int i = edgePath.size()-1; i >= 0; i--) {
+            int x = edgePath[i].u->node;
+            int y = edgePath[i].v->node;
+            int w = rGraph.weight[x][y];
 
-            if(matAdj[q->node][r->node] == 1) {
-                flux[q->node][r->node] += minCap;
-            }
-            else {
-                flux[r->node][q->node] -= minCap;
-            }
+            cout << "(" << x << ", " << y << ") " << w << endl;
         }
-
-        rGraph.clearGraph();
-        for(int i = 0; i < m; i++) {
-            u = edges[i].u;
-            v = edges[i].v;
-
-            if(matAdj[u->node][v->node] == 1) {
-                c1 = weight[u->node][v->node] - flux[u->node][v->node];
+        
+        for(int i = edgePath.size()-1; i >= 0; i--) {
+            int x = edgePath[i].u->node;
+            int y = edgePath[i].v->node;
+            int w = weight[x][y];
+            int flow = 0;
             
-                if(flux[u->node][v->node] > 0) {
-                    rGraph.addEdge(v->node, u->node, flux[u->node][v->node]);
-                }
-
-                if(c1 > 0) {
-                    rGraph.addEdge(u->node, v->node, c1);
+            if(matAdj[x][y] == 1) {
+                flow = w - minCap;
+                rGraph.weight[x][y] = flow;
+                
+                rGraph.addEdge(y, x, minCap);
+                if(flow == 0) {
+                    rGraph.deleteEdge(edgePath[i]);
                 }
             }
         }
+        maxFlow += minCap;
     }
-    for(int i = 0; i < n; i++) {
-        maxFlow += flux[0][i];
-    }
+
     return maxFlow;
 }
