@@ -255,12 +255,20 @@ class Graph {
 };
 
 int main() {
+    string test;
+    cin >> test;
+
+    ifstream file(test);
+    
+    if(!file.is_open()) {
+        cout << "Error: File isn't open" << endl;
+        return 1;
+    }
+    
     int n, m, q;
     int u, v, w;
     int city1, city2;
-
-    ifstream file("test1.txt");
-
+    
     file >> n >> m >> q;
 
     Graph g(n);
@@ -276,5 +284,6 @@ int main() {
     }
     
     file.close();
+    
     return 0;
 }
