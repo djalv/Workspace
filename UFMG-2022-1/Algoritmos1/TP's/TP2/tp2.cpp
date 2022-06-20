@@ -14,19 +14,16 @@ using namespace std;
 class Node {
     public:
         int node;
-        bool visited;
         int d; // Estimativa de custo minino
         int p; // Nó parente na arvore de caminhos minimos
         
         Node(int node) {
             this->node = node;
-            this->visited = false;
             this->d = -1;
             this->p = -1;
         }
         Node() {
             this->node = -1;
-            this->visited = false;
             this->d = -1;
             this->p = -1;
         }
@@ -81,7 +78,7 @@ class Heap {
         }
     
         void insert(Node v) {
-            if(size == cap) {
+            if(size >= cap) {
                 cout << "Overflow: Não consegue inserir" << endl;
                 return;
             }
@@ -89,27 +86,6 @@ class Heap {
             int i = size - 1;
             A[i] = v;
             ids[v.node] = i;
-
-            while(i != 0 && A[parent(i)].d >= A[i].d){
-                Node aux = A[parent(i)];
-                A[parent(i)] = A[i];
-                A[i] = aux;
-            
-                ids[A[parent(i)].node] = parent(i);
-                ids[A[i].node] = i;
-
-                i = parent(i);
-            }
-        }
-
-        void decreaseKey(int &idx, int d) {
-            int i = ids[idx];
-            
-            if(i < 0) {
-                return;
-            }
-
-            A[i].d = d;
 
             while(i != 0 && A[parent(i)].d >= A[i].d){
                 Node aux = A[parent(i)];
@@ -161,13 +137,6 @@ class Heap {
                 minHeapfy(min);
             }
         }
-
-        void printHeap() {
-            for(int i = 0; i < size; i++) {
-                cout << A[i].d << " ";
-            }
-            cout << endl;
-        }
 };
 
 class Graph {
@@ -199,7 +168,7 @@ class Graph {
         void addEdge(int u, int v, int w=0) {
             Node *x = &nodes[u];
             Node *y = &nodes[v];
-            nodes[v].d = w;
+            //nodes[v].d = w;
             Edge xy(x, y, w);
 
             edges.push_back(xy);
@@ -207,31 +176,14 @@ class Graph {
             weight[u][v] = w;
             m++;
         }
-        void initSingleSource(Node s) {
-            path.clear();
-
-            for(int i = 0; i < n; i++) {
-                nodes[i].d = 2147483647;
-                nodes[i].p = -1;
-            }
-            nodes[s.node].d = 0;
-            nodes[s.node].visited = true;
-        }
-
-        void relax(Node &u, Node &v) {
-            if(nodes[v.node].d > nodes[u.node].d + weight[u.node][v.node]) {
-                nodes[v.node].d = nodes[u.node].d + weight[u.node][v.node];
-                nodes[v.node].p = nodes[u.node].node;
-            }
-        }
 
         int dijkstra(Node s, Node t) {
             list <Node> :: iterator v;
-            vector <int> widest(n, -2147483647);
+            vector <int> capacity(n, -2147483647);
             vector <int> path(n, 0);
             Heap pq(n);
 
-            widest[s.node] = 2147483647;
+            capacity[s.node] = 2147483647;
             nodes[s.node].d = 0;
 
             pq.insert(nodes[s.node]);
@@ -240,25 +192,24 @@ class Graph {
                 Node u = nodes[pq.extractMin().node];
 
                 for(v = adj[u.node].begin(); v != adj[u.node].end(); v++) {
-                    int dstc = max(widest[(*v).node], min(widest[u.node], weight[u.node][(*v).node]));
+                    int dstc = max(capacity[(*v).node], min(capacity[u.node], weight[u.node][(*v).node]));
 
-                    if(dstc > widest[(*v).node]) {
-                        widest[(*v).node] = dstc;
+                    if(dstc > capacity[(*v).node]) {
+                        capacity[(*v).node] = dstc;
                         path[(*v).node] = u.node;
-
+                        
+                        nodes[(*v).node].d = dstc;
+                        
                         pq.insert(nodes[(*v).node]);
                     }
                 }
             }
-            return widest[t.node];
+            return capacity[t.node];
         }
 };
 
-int main() {
-    string test;
-    cin >> test;
-
-    ifstream file(test);
+int main(int argc, char *argv[]) {
+    ifstream file(argv[1]);
     
     if(!file.is_open()) {
         cout << "Error: File isn't open" << endl;
@@ -280,7 +231,7 @@ int main() {
 
     for(int i = 0; i < q; i++) {
         file >> city1 >> city2;
-        cout << g.dijkstra(city1-1, city2-1) << endl;
+        cout << g.dijkstra(city1-1, 5) << endl;
     }
     
     file.close();
