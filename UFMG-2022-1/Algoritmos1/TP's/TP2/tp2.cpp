@@ -208,33 +208,24 @@ class Graph {
         }
 };
 
-int main(int argc, char *argv[]) {
-    ifstream file(argv[1]);
-    
-    if(!file.is_open()) {
-        cout << "Error: File isn't open" << endl;
-        return 1;
-    }
-    
+int main() {
     int n, m, q;
     int u, v, w;
     int city1, city2;
     
-    file >> n >> m >> q;
+    cin >> n >> m >> q;
 
     Graph g(n);
 
     for(int i = 0; i < m; i++) {
-        file >> u >> v >> w;
+        cin >> u >> v >> w;
         g.addEdge(u-1, v-1, w);
     }
 
     for(int i = 0; i < q; i++) {
-        file >> city1 >> city2;
-        cout << g.dijkstra(city1-1, 5) << endl;
+        cin >> city1 >> city2;
+        cout << g.dijkstra(city1-1, city2-1) << endl;
     }
-    
-    file.close();
     
     return 0;
 }
