@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** Makefile: Is a directory.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-unknown-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** Makefile: Is a directory.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 17 20:11:13 2022
+# Make data base, printed on Sun Jul 10 17:42:44 2022
 
 # Variables
 
@@ -23,7 +21,7 @@ PULSE_SERVER = unix:/run/flatpak/pulse/native
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4e779ac5-b441-43aa-94fa-d2e0f28fdec8.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-23b4dc15-9941-4671-8873-7071aa612b70.sock
 # environment
 SBX_CHROME_API_RQ = 1
 # environment
@@ -47,7 +45,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/neto/djalv/Workspace
+PWD = /home/neto/djalv/Workspace-1
 # environment
 ZYPAK_ZYGOTE_STRATEGY_SPAWN = 1
 # automatic
@@ -63,7 +61,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/neto/.var/app/com.visualstudio.code/config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /home/neto/.var/app/com.visualstudio.code/config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 LANG = C
 # environment
@@ -79,11 +77,11 @@ MAKEFLAGS = pqrR
 # environment
 ZYPAK_SPAWN_LATEST_ON_REEXEC = 0
 # makefile
-CURDIR := /home/neto/djalv/Workspace
+CURDIR := /home/neto/djalv/Workspace-1
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -123,7 +121,7 @@ XDG_DATA_HOME = /home/neto/.var/app/com.visualstudio.code/data
 # environment
 SANDBOX_LD_PRELOAD = /app/bin/../lib/libzypak-preload-host.so:/app/bin/../lib/libzypak-preload-host-spawn-strategy.so
 # environment
-SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2323,unix/djalvPC:/tmp/.ICE-unix/2323
+SESSION_MANAGER = local/djalvPC:@/tmp/.ICE-unix/2499,unix/djalvPC:/tmp/.ICE-unix/2499
 # automatic
 *F = $(notdir $*)
 # environment
@@ -175,7 +173,7 @@ LC_TIME = pt_BR.UTF-8
 # environment
 XDG_CONFIG_HOME = /home/neto/.var/app/com.visualstudio.code/config
 # environment
-INVOCATION_ID = 5cc68b8ae696472d989e82c40c2231da
+INVOCATION_ID = 6c0109cde2ac4e7ba9346035f5424b67
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -215,20 +213,19 @@ DISPLAY = :99.0
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2090
+MANAGERPID = 2267
 # environment
 LC_MEASUREMENT = pt_BR.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 4217
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5453
 # environment
 QT_STYLE_OVERRIDE = adwaita
 # environment
-SSH_AGENT_PID = 2288
+SSH_AGENT_PID = 2465
 # environment
 _ = /usr/bin/make
 # environment
 LC_PAPER = pt_BR.UTF-8
- 
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -238,7 +235,7 @@ PULSE_CLIENTCONFIG = /run/flatpak/pulse/config
 # environment
 LC_CTYPE = pt_BR.UTF-8
 # environment
-JOURNAL_STREAM = 8:44868
+JOURNAL_STREAM = 8:46999
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -250,7 +247,7 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-b0338c6e-1.67.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-b0338c6e-1.68.1-main.sock
 # environment
 IM_CONFIG_PHASE = 1
 # default
@@ -281,12 +278,15 @@ LC_IDENTIFICATION = pt_BR.UTF-8
 # Load=132/1024=13%, Rehash=0, Collisions=10/143=7%
 
 # Pattern-specific Variable Values
+ 
+make: *** Makefile: Is a directory.  Stop.
+
 
 # No pattern-specific variable values.
 
 # Directories
 
-# . (device 2066, inode 4589971): 8 files, no impossibilities.
+# . (device 2066, inode 4593548): 8 files, no impossibilities.
 
 # 8 files, no impossibilities in 1 directories.
 
@@ -329,6 +329,6 @@ all:
 # strcache performance: lookups = 16 / hit rate = 25%
 # hash-table stats:
 # Load=12/8192=0%, Rehash=0, Collisions=0/16=0%
-# Finished Make data base on Fri Jun 17 20:11:13 2022
+# Finished Make data base on Sun Jul 10 17:42:44 2022
 
  

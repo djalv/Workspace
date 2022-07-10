@@ -78,7 +78,7 @@ int maxAreaRectangle(vector <int> &arr, int &x, int &y) {
 
     vector <int> width;
 
-    for(int i = 0; i < arr.size(); i++) {
+    for(int i = 0; i < arr.size(); i++) { // Calcula a largura
         width.push_back(r[i] - l[i] - 1);
     }
 
@@ -86,11 +86,11 @@ int maxAreaRectangle(vector <int> &arr, int &x, int &y) {
     x = width[0];
     y = arr[0];
 
-    for(int i = 0; i < arr.size(); i++) {
+    for(int i = 0; i < arr.size(); i++) { // Acha a maior area
         area = width[i] * arr[i];
         if(area >= maxArea) {
             if(area == maxArea) {
-                if(width[i] > y) {
+                if(arr[i] >= y) {
                     x = width[i];
                     y = arr[i];
                 }
@@ -115,6 +115,7 @@ void areaOfRectangles(vector <vector <int>> &arr, vector <Area> &areas) {
     maxArea.y = -1;
     maxArea.area = -1;
 
+    // Vamos montar o histograma
     for(int i = 0; i < arr.size(); i++) {
         for(int j = 0; j < arr[i].size(); j++) {
             if(arr[i][j] == 0) {
@@ -124,6 +125,7 @@ void areaOfRectangles(vector <vector <int>> &arr, vector <Area> &areas) {
                 v[j] += arr[i][j];
             }
         }
+
         area = maxAreaRectangle(v, spaceLength, spaceWidth);
         a.area = area;
         a.x = spaceLength;
@@ -132,6 +134,7 @@ void areaOfRectangles(vector <vector <int>> &arr, vector <Area> &areas) {
 
         if(a.area > maxArea.area) {
             maxArea = a;
+        
         }
     }
 }
@@ -141,7 +144,7 @@ int main() {
     int area, maxWidth;
     int tableX, tableY;
     char in;
-    Table t, maxTableArea;
+    Table t, maxTableArea, s;
     
     maxTableArea.area = -1;
     maxTableArea.x = -1;
@@ -180,6 +183,7 @@ int main() {
 
     }
     
+    // Calcula a maior mesa e aplica a regra de desempate
     for(int i = 0; i < tables.size(); i++) {
         for(int j = 0; j < spaceAreas.size(); j++) {
             if(tables[i].area <= spaceAreas[j].area) {
@@ -188,10 +192,12 @@ int main() {
                         if(tables[i].area == maxTableArea.area) {
                             if(tables[i].y > maxTableArea.y) {
                                 maxTableArea = tables[i];
+                                s = spaceAreas[j];
                             }
                         }
                         else {
                             maxTableArea = tables[i];
+                            s = spaceAreas[j];
                         }
                     }
                 }
@@ -200,5 +206,6 @@ int main() {
     }
     
     cout << maxTableArea.x << " " << maxTableArea.y << endl;
+    
     return 0;
 }
