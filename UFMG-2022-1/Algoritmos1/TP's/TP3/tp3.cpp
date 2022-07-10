@@ -16,6 +16,7 @@ vector <int> leftIndex(vector <int> &arr) { // O(n)
     vector <int> l; // Indices no qual é o elemento mais proximo a esquerda com valor menor q i
     
     stack <pair <int, int>> s; // Stack para memorizar os elementos menores anteriores em ordem crescente dos valores
+                               // O primeiro é o valor e o segundo é o indice
 
     for(int i = 0; i < arr.size(); i++) {
         if(s.empty()) { // Se a stack estiver vazia é pq nn exite nenhum elemento a esquerda menor q i
@@ -86,8 +87,9 @@ int maxAreaRectangle(vector <int> &arr, int &x, int &y) {
     x = width[0];
     y = arr[0];
 
-    for(int i = 0; i < arr.size(); i++) { // Acha a maior area
+    for(int i = 0; i < arr.size(); i++) { // Calcula e Acha a maior area
         area = width[i] * arr[i];
+        
         if(area >= maxArea) {
             if(area == maxArea) {
                 if(arr[i] >= y) {
@@ -134,7 +136,6 @@ void areaOfRectangles(vector <vector <int>> &arr, vector <Area> &areas) {
 
         if(a.area > maxArea.area) {
             maxArea = a;
-        
         }
     }
 }
@@ -182,7 +183,7 @@ int main() {
         tables.push_back(t);
 
     }
-    
+
     // Calcula a maior mesa e aplica a regra de desempate
     for(int i = 0; i < tables.size(); i++) {
         for(int j = 0; j < spaceAreas.size(); j++) {
